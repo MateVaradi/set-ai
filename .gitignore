@@ -1,0 +1,11 @@
+/.DS_Store
+/.env
+/.ipynb_checkpoints
+/__pycache__
+/data
+/env
+/notebooks
+/output
+/processed
+/requirements.txt
+/uploads
