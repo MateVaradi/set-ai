@@ -19,16 +19,17 @@ def process_image(image_path, filename, output_folder):
 
     # Return output
     if sets:
+        processed_filenames = []
         print("Set(s) found.")
         for i, set_dict in enumerate(sets):
             processed_filename = f"analyzed_set-{i+1}_{filename}"
+            processed_filenames.append(processed_filename)
             output_path = f"{output_folder}/{processed_filename}"
 
             set_indices = find_set_indices(board_df, set_dict)
             highlight_cards_by_id(image_path, set_indices, output_path)
         
-        # TODO return all images
-        return processed_filename
+        return ','.join(processed_filenames)
     else:
         print("No sets found.")
         # Save image unmodified
@@ -37,7 +38,7 @@ def process_image(image_path, filename, output_folder):
         img = Image.open(image_path)
         img.save(output_path)
 
-        return processed_filename
+        return ','.join([processed_filename])
 
 
 if __name__ == '__main__': 

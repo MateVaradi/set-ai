@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import os
 from werkzeug.utils import secure_filename
-from PIL import Image  # Example for image processing
+from PIL import Image
 from process_image import process_image
 
 app = Flask(__name__)
@@ -34,6 +34,15 @@ def make_image_grayscale(image_path, filename, output_folder):
 
     return processed_filename
 
+# TODO: display uploaded image
+# - display waiting message
+# - display whether sets are found
+
+# Add a route for the home page
+@app.route('/')
+def index():
+    return render_template(HTML_LOC)
+
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_image():
     if request.method == 'POST':
@@ -50,22 +59,19 @@ def upload_image():
 
             # Process the image
             processed_folder = app.config['PROCESSED_FOLDER']
-            processed_filename = process_image(file_path, filename, processed_folder)
+            processed_filenames = process_image(file_path, filename, processed_folder)
 
             # Redirect to display the processed image
-            return redirect(url_for('display_processed_image', filename=processed_filename))
+            return redirect(url_for('display_processed_images', filenames=processed_filenames))
+
     
     return render_template(HTML_LOC)
 
-# TODO: display uploaded image
-# - display waiting message
-# - display whether sets are found
-# - show all sets if more than one
-
-@app.route('/processed/<filename>')
-def display_processed_image(filename):
-    processed_image_url = url_for('processed_file', filename=filename)
-    return render_template(HTML_LOC, processed_image_url=processed_image_url)
+@app.route('/processed/<filenames>')
+def display_processed_images(filenames): 
+    filenames = filenames.split(',')
+    processed_image_urls = [url_for('processed_file', filename=filename) for filename in filenames]
+    return render_template(HTML_LOC, processed_image_urls=processed_image_urls)
 
 @app.route('/processed_files/<filename>')
 def processed_file(filename):
