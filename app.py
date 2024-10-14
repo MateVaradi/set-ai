@@ -69,9 +69,15 @@ def upload_image():
 
 @app.route('/processed/<filenames>')
 def display_processed_images(filenames): 
+    if "no-set" in filenames:
+        message = "No sets found."
+    elif "," in filenames:
+        message = "Found multiple sets:"
+    else:
+        message = "Found a set:"
     filenames = filenames.split(',')
     processed_image_urls = [url_for('processed_file', filename=filename) for filename in filenames]
-    return render_template(HTML_LOC, processed_image_urls=processed_image_urls)
+    return render_template(HTML_LOC, processed_image_urls=processed_image_urls, message=message)
 
 @app.route('/processed_files/<filename>')
 def processed_file(filename):

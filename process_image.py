@@ -38,7 +38,7 @@ def process_image(image_path, filename, output_folder):
         img = Image.open(image_path)
         img.save(output_path)
 
-        return ','.join([processed_filename])
+        return processed_filename
 
 
 if __name__ == '__main__': 
