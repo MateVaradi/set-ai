@@ -34,10 +34,6 @@ def make_image_grayscale(image_path, filename, output_folder):
 
     return processed_filename
 
-# TODO: display uploaded image
-# - display waiting message
-# - display whether sets are found
-
 # Add a route for the home page
 @app.route('/')
 def index():

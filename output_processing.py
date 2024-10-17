@@ -3,7 +3,7 @@ import numpy as np
 from operator import itemgetter
 
 def find_cards(image):
-    
+
     # Convert to grayscale
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     
@@ -24,7 +24,7 @@ def find_cards(image):
         approx = cv2.approxPolyDP(contour, epsilon, True)
         
         # Filter out small areas or non-rectangular shapes
-        if len(approx) == 4 and cv2.contourArea(contour) > 1000:  # Adjust contour area threshold if necessary
+        if len(approx) == 4 and cv2.contourArea(contour) > 750:  # Adjust contour area threshold if necessary
             x, y, w, h = cv2.boundingRect(approx)
             bboxes.append( ((x, y), (x + w, y + h)) )
 
@@ -77,13 +77,17 @@ def order_cards_lrtb(all_cards):
 
     return ordered_cards
 
-def highlight_cards_by_id(image_path, ids, output_path):
+def highlight_cards_by_id(image_path, ids, output_path, scaling_factor=0.4):
     # Load image
     image = cv2.imread(image_path)
 
+    # Downscale the image 
+    # TODO dynmaic scaling according to size
+    image = cv2.resize(image, None, fx=scaling_factor, fy=scaling_factor, interpolation=cv2.INTER_AREA)
+
     # Find all cards
     all_cards = find_cards(image)
-    
+
     # Sort cards from left to right, top to bottom
     cards_ordered = order_cards_lrtb(all_cards)
     
