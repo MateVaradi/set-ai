@@ -4,7 +4,9 @@
 /__pycache__
 /data
 /env
+/set-env
 /notebooks
 /output
 /processed
 /uploads
+Notes.md
