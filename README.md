@@ -1,4 +1,4 @@
-# Set Recognition with LLM
+# Set Recognition with AI
 
 ## Overview
 
