@@ -26,5 +26,23 @@ Simply upload your SET game to: https://set-ai-app-c162aa183dd5.herokuapp.com/
 ![set_board_results_1](https://github.com/user-attachments/assets/7c5e79a7-114a-4a78-89fe-afd4b6791019)
 ![set_board_results_0](https://github.com/user-attachments/assets/0845aa69-f1ca-4ef9-a059-6ad60f780b3f)
 
+### Development
+
+#### To run:
+
+Create `.env` with the following keys:
+`AZURE_OAI_ENDPOINT = "..."`
+`AZURE_OAI_KEY = "..."`
+
+Run `app.py` locally.
+
+#### To deploy on Heroku:
+
+1. `heroku login`
+2. `heroku create your-app-name`
+3. `git push heroku main`
+4. Add env variables with `heroku config:set SECRET_KEY=your_secret_key`
+5. `heroku open`
+
 ### License
 This project is licensed under the MIT License.
