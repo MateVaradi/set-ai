@@ -17,7 +17,7 @@ This project uses the OpenAI's GPT-4o model to identify valid sets in photos of 
 
 ### How to use
 
-Simply upload your SET game to: https://set-ai-app-c162aa183dd5.herokuapp.com/
+Simply upload your SET game to: 
 
 ### Example
 
